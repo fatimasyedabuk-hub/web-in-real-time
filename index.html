@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The sky over Toronto, live</title>
+<meta name="description" content="Live weather and air quality for Toronto and a few cities around the world. The sky, the sound and the words on the page all change with the data.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Hanken+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<canvas id="sky" aria-hidden="true"></canvas>
+
+<main class="page">
+  <header class="top">
+    <h1 id="title">Toronto right now</h1>
+    <div class="tools">
+      <div class="cities" id="cities" role="radiogroup" aria-label="City"></div>
+      <button class="chip" id="unitBtn" aria-pressed="false" title="Switch between metric and imperial units">°C · km/h</button>
+      <button class="chip" id="soundBtn" aria-pressed="false" title="Play the weather as sound">Sound off</button>
+    </div>
+  </header>
+
+  <section class="panel" aria-live="polite">
+    <p class="loading" id="loading">Loading live data…</p>
+    <div class="error" id="error" hidden>
+      <p id="errorMsg">Could not load the weather.</p>
+      <button class="chip" id="retryBtn">Try again</button>
+    </div>
+
+    <div id="content" hidden>
+      <div class="hero">
+        <p class="temp"><span id="temp">--</span><span class="deg" id="tempUnit">°C</span></p>
+        <div>
+          <p class="cond" id="cond">--</p>
+          <p class="feels" id="feels"></p>
+        </div>
+      </div>
+      <p class="story" id="story"></p>
+
+      <dl class="stats">
+        <div><dt>Humidity</dt><dd id="hum">--</dd></div>
+        <div><dt>Wind</dt><dd id="wind">--</dd></div>
+        <div><dt>Rain now</dt><dd id="rain">--</dd></div>
+        <div><dt>Air quality</dt><dd id="aqi">--</dd></div>
+      </dl>
+
+      <div class="scrub">
+        <div class="scrubhead">
+          <label for="hour">Move through the next 24 hours</label>
+          <span id="hourLabel">Now</span>
+        </div>
+        <div class="scrubrow">
+          <button class="chip play" id="playBtn" aria-label="Play the next 24 hours">Play</button>
+          <input type="range" id="hour" min="0" max="23" step="1" value="0">
+        </div>
+        <svg id="spark" viewBox="0 0 240 48" preserveAspectRatio="none" role="img" aria-label="Temperature over the next 24 hours"></svg>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <span id="updated"></span>
+    <button class="chip" id="refreshBtn">Refresh</button>
+    <span>Weather and air quality data: <a href="https://open-meteo.com/" rel="noopener">Open-Meteo.com</a> (CC BY 4.0). Drawn and coded by me, no photos or recordings used.</span>
+  </footer>
+</main>
+
+<script src="js/app.js"></script>
+</body>
+</html>
